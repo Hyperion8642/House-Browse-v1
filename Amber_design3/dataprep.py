@@ -10,7 +10,7 @@ import numpy as np
 CSV_URL = "https://github.com/yyy1029/House-Browse/releases/download/v1.0/HouseTS.csv"
 
 
-def load_data(path: str = CSV_PATH) -> pd.DataFrame:
+def load_data(path: str = CSV_URL) -> pd.DataFrame:
     """
     Load HouseTS.csv and compute key derived fields.
 
