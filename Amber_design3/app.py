@@ -9,11 +9,6 @@ from ui_components import income_control_panel
 
 
 # ---------- Load data ----------
-# @st.cache_data
-# def get_data():
-#     return load_data("HouseTS.csv")
-from dataprep import load_data, make_city_view_data
-
 @st.cache_data
 def get_data():
     return load_data() 
