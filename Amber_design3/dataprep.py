@@ -6,7 +6,8 @@ Data loading and preparation helpers for Design 3 (HouseTS dataset).
 import pandas as pd
 import numpy as np
 
-CSV_PATH = "HouseTS.csv"
+# CSV_PATH = "HouseTS.csv"（if you want to download the csv on your desktop)
+CSV_URL = "https://github.com/yyy1029/House-Browse/releases/download/v1.0/HouseTS.csv"
 
 
 def load_data(path: str = CSV_PATH) -> pd.DataFrame:
@@ -18,7 +19,8 @@ def load_data(path: str = CSV_PATH) -> pd.DataFrame:
     - city_clean  (for plotting)
     - monthly_income_pc (Per Capita Income / 12)
     """
-    df = pd.read_csv(path)
+    # df = pd.read_csv(path)（if you want to download the csv on your desktop)
+    df = pd.read_csv(CSV_URL)
 
     # ensure datetime
     df["date"] = pd.to_datetime(df["date"])
