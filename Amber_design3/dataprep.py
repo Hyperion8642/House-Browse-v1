@@ -10,24 +10,14 @@ import numpy as np
 CSV_URL = "https://github.com/yyy1029/House-Browse/releases/download/v1.0/HouseTS.csv"
 
 
-def load_data(path: str = CSV_URL) -> pd.DataFrame:
+def load_data() -> pd.DataFrame:
     """
-    Load HouseTS.csv and compute key derived fields.
-
-    Returns a row-level dataframe with:
-    - parsed date
-    - city_clean  (for plotting)
-    - monthly_income_pc (Per Capita Income / 12)
+    Load HouseTS.csv from GitHub Releases and compute key derived fields.
     """
-    # df = pd.read_csv(path)（if you want to download the csv on your desktop)
     df = pd.read_csv(CSV_URL)
-
-    # ensure datetime
+    
     df["date"] = pd.to_datetime(df["date"])
-
     df["city_clean"] = df["city"]
-
-    # per-capita monthly income
     df["monthly_income_pc"] = df["Per Capita Income"] / 12.0
 
     return df
