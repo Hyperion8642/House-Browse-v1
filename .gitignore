@@ -5,3 +5,5 @@ D3/HouseTS.csv
 D3/us_zcta.geojson
 D3/zcta.geojson
 __pycache__/
+.DS_Store
+**/.DS_Store
