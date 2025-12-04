@@ -48,6 +48,30 @@ def get_income_and_persona_logic():
     return final_income, persona
 
 
+def render_affordability_summary_card(final_income, persona, max_affordable_price):
+    """
+    Renders just the Affordability Summary Card.
+    (Can be used anywhere to display the summary)
+    """
+    st.markdown("##### Affordability Summary")
+
+    st.markdown(
+        f"""
+        <div style="
+            padding: 1rem 1rem;
+            background-color: #ffffff10;
+            border-radius: 8px;
+            border: 1px solid #444;
+            ">
+            <p style="margin:0.1rem 0;"><strong>Profile:</strong> {persona}</p>
+            <p style="margin:0.1rem 0;"><strong>Annual income:</strong> ${int(final_income):,}</p>
+            <p style="margin:0.1rem 0;"><strong>Max Affordable Price (from PTI formula):</strong> ≈ ${max_affordable_price:,.0f}</p> 
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 def persona_income_slider(final_income, persona):
     """
     NEW FUNCTION: Renders the Persona selector and the Rough Adjustment Slider.
@@ -81,47 +105,47 @@ def persona_income_slider(final_income, persona):
     # st.markdown("---") # Separator
 
 
-def render_manual_input_and_summary(final_income, persona, max_affordable_price):
-    """
-    Renders the Manual Input, Tip, and Affordability Summary Card.
-    (Used in the Top Right Profile Column)
-    """
+# def render_manual_input_and_summary(final_income, persona, max_affordable_price):
+#     """
+#     Renders the Manual Input, Tip, and Affordability Summary Card.
+#     (Used in the Top Right Profile Column)
+#     """
     
-    # --- 1. RENDER MANUAL INPUT (Vertical Stack) ---
-    st.number_input(
-        "Exact annual income ($)",
-        min_value=20000,
-        max_value=200000,
-        value=st.session_state.income_manual_key,
-        step=500,
-        format="%d",
-        key="income_manual_key",
-        help="This income is used to filter available cities/ZIPs by Per Capita Income.",
-        on_change=sync_slider_to_manual,
-    )
-    # # TIP PLACEMENT
-    # st.caption(
-    #     "Tip: use the slider for rough adjustment and the box for precise input."
-    # )
-    # --- 2. RENDER AFFORDABILITY SUMMARY ---
-    st.markdown("---")
-    st.markdown("##### Affordability Summary")
+#     # --- 1. RENDER MANUAL INPUT (Vertical Stack) ---
+#     st.number_input(
+#         "Exact annual income ($)",
+#         min_value=20000,
+#         max_value=200000,
+#         value=st.session_state.income_manual_key,
+#         step=500,
+#         format="%d",
+#         key="income_manual_key",
+#         help="This income is used to filter available cities/ZIPs by Per Capita Income.",
+#         on_change=sync_slider_to_manual,
+#     )
+#     # # TIP PLACEMENT
+#     # st.caption(
+#     #     "Tip: use the slider for rough adjustment and the box for precise input."
+#     # )
+#     # --- 2. RENDER AFFORDABILITY SUMMARY ---
+#     st.markdown("---")
+#     st.markdown("##### Affordability Summary")
 
-    st.markdown(
-        f"""
-        <div style="
-            padding: 1rem 1rem;
-            background-color: #ffffff10;
-            border-radius: 8px;
-            border: 1px solid #444;
-            ">
-            <p style="margin:0.1rem 0;"><strong>Profile:</strong> {persona}</p>
-            <p style="margin:0.1rem 0;"><strong>Annual income:</strong> ${int(final_income):,}</p>
-            <p style="margin:0.1rem 0;"><strong>Max affordable price using Ratio-to-Income formula:</strong> ≈ ${max_affordable_price:,.0f}</p> 
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+#     st.markdown(
+#         f"""
+#         <div style="
+#             padding: 1rem 1rem;
+#             background-color: #ffffff10;
+#             border-radius: 8px;
+#             border: 1px solid #444;
+#             ">
+#             <p style="margin:0.1rem 0;"><strong>Profile:</strong> {persona}</p>
+#             <p style="margin:0.1rem 0;"><strong>Annual income:</strong> ${int(final_income):,}</p>
+#             <p style="margin:0.1rem 0;"><strong>Max affordable price using Ratio-to-Income formula:</strong> ≈ ${max_affordable_price:,.0f}</p> 
+#         </div>
+#         """,
+#         unsafe_allow_html=True,
+#     )
     
     
 income_control_panel = get_income_and_persona_logic

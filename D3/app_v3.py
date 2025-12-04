@@ -1,4 +1,6 @@
 # app_v3.py
+
+
 # DEC 1 9:30pm & later code
 
 import streamlit as st
@@ -34,7 +36,7 @@ st.markdown(
     Those with a ratio between 3.1 to 4.0 inclusive are classified as <strong>"Moderately Unaffordable"</strong>.
     Those with a ratio between 4.1 to 5.0 inclusive are classified as <strong>"Seriously Unaffordable"</strong>.
     Those with a ratio between 5.1 to 8.9 inclusive are classified as <strong>"Severely Unaffordable"</strong>.
-    Those with a ratios $ge; are classified as <strong>"Impossibly Unaffordable"</strong></small>.
+    Those with a ratios &ge; are classified as <strong>"Impossibly Unaffordable"</strong></small>.
     </div>
     """,
     unsafe_allow_html=True

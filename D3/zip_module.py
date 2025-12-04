@@ -31,18 +31,15 @@ def classify_affordability_zip(ratio: float) -> str:
 @st.cache_data(ttl=3600)
 def load_city_zip_data(city_geojson_code: str, df_full: pd.DataFrame, max_pci: float) -> pd.DataFrame:
     # ------------------------------------------------------------------------
-    # FIX: Added max_pci argument for filtering
+    # NOTE: max_pci argument kept for compatibility but no longer used for filtering
+    # All zip codes are now shown regardless of income
     # ------------------------------------------------------------------------
     """
     Filters the pre-loaded full DataFrame (df_full) to a single city 
-    using the GeoJSON code (e.g., ATL) AND filters ZIP codes by max_pci.
+    using the GeoJSON code (e.g., ATL). All ZIP codes are included.
     """
-    # 1. Filter by City (GeoJSON Code)
+    # 1. Filter by City (GeoJSON Code) only - no income filtering
     df_city_zip = df_full[df_full["city_geojson_code"] == city_geojson_code].copy()
-
-    # 2. Hard Filter by Income (NEW LOGIC)
-    # Only keep ZIP codes where the per_capita_income is <= user's annual income
-    df_city_zip = df_city_zip[df_city_zip["per_capita_income"] <= max_pci].copy()
 
 
     # Ensure the required columns exist for subsequent steps

@@ -20,9 +20,9 @@ AFFORDABILITY_CATEGORIES = {
     "Impossibly Unaffordable": (8.9, None),
 }
 AFFORDABILITY_COLORS = {
-    "Affordable": "green", "Moderately Unaffordable": "yellowgreen", 
-    "Seriously Unaffordable": "orange", "Severely Unaffordable": "red", 
-    "Impossibly Unaffordable": "darkred",
+    "Affordable": "#4CAF50", "Moderately Unaffordable": "#FFC107", 
+    "Seriously Unaffordable": "#FF9800", "Severely Unaffordable": "#E57373", 
+    "Impossibly Unaffordable": "#B71C1C",
 }
 
 def classify_affordability(ratio: float) -> str:
@@ -104,7 +104,7 @@ def make_city_view_data(df_full: pd.DataFrame, annual_income: float, year: int, 
         city_full=("city_full", "first"), 
     ).reset_index()
 
-    city_agg[RATIO_COL] = city_agg["median_sale_price"] / city_agg["per_capita_income"]
+    city_agg[RATIO_COL] = city_agg["median_sale_price"] / (city_agg["per_capita_income"] * 2.51)
     city_agg["affordability_rating"] = city_agg[RATIO_COL].apply(classify_affordability)
     city_agg["affordable"] = city_agg[RATIO_COL] <= AFFORDABILITY_THRESHOLD
 
