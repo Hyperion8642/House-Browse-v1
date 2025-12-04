@@ -53,7 +53,7 @@ def render_affordability_summary_card(final_income, persona, max_affordable_pric
     Renders just the Affordability Summary Card.
     (Can be used anywhere to display the summary)
     """
-    st.markdown("##### Affordability Summary")
+    st.markdown("#### Affordability Summary")
 
     st.markdown(
         f"""
@@ -65,7 +65,7 @@ def render_affordability_summary_card(final_income, persona, max_affordable_pric
             ">
             <p style="margin:0.1rem 0;"><strong>Profile:</strong> {persona}</p>
             <p style="margin:0.1rem 0;"><strong>Annual income:</strong> ${int(final_income):,}</p>
-            <p style="margin:0.1rem 0;"><strong>Max Affordable Price (from PTI formula):</strong> ≈ ${max_affordable_price:,.0f}</p> 
+            <p style="margin:0.1rem 0;"><strong>Max Affordable Price (from PTI thresholds):</strong> ≈ ${max_affordable_price:,.0f}</p> 
         </div>
         """,
         unsafe_allow_html=True,
@@ -79,6 +79,9 @@ def persona_income_slider(final_income, persona):
     """
     
     st.markdown("##### Who are you?")
+    st.markdown("""Input income data using the slider below.
+    The Affordability Summary will tell you the maximum price of a house that would be considered affordable based on the PTI thresholds.
+    The zip code map below color-codes unaffordable zip codes as red, and affordable zip codes as green. """)
     persona_options = list(PERSONA_DEFAULTS.keys())
     
     st.radio(
@@ -90,7 +93,7 @@ def persona_income_slider(final_income, persona):
         horizontal=True
     )
     
-    st.markdown("##### Budget settings")
+    st.markdown("##### Income settings")
     
     # RENDER SLIDER (Takes full width of the column it's in)
     st.slider(

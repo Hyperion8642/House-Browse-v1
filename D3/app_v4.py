@@ -208,9 +208,13 @@ with header_row_main:
     # --- [FIX 3] CUSTOM HEADER TO REMOVE TOP MARGIN ---
     st.markdown("""
         <h3 style="margin-top: -5px; padding-top: 0;">
-            Compare metro areas by price-to-income ratio & scroll mini-map for zipcode level details
+            Bar Chart and User Input ZIP-Code Map
         </h3>
     """, unsafe_allow_html=True)
+    st.markdown("""The left column allows users to get an idea of how the PTI (price-to-income) ratio differs across the different 
+    metro areas. The right column allows a user income details to figure out zip codes in a specific metro area that are affordable. 
+    The colors on the zip code map indicate how affordable that area is relative to the maximum affordable price. **Adjust the year 
+    the data is being displayed using the year selector to the right.**""")
 
 
 # 3. CALCULATE DATA
@@ -245,7 +249,7 @@ with main_col_left:
             full_to_clean_city_map = pd.Series(unique_city_pairs["city"].values, index=unique_city_pairs["city_full"]).to_dict()
 
             selected_full_metros = st.multiselect(
-                "Filter Metro Areas on bar chart(all selected by default):",
+                "Filter Metro Areas on the bar chart below (all selected by default):",
                 options=unique_city_pairs["city_full"].tolist(), 
                 default=unique_city_pairs["city_full"].tolist(), 
                 key="metro_multiselect"
@@ -357,7 +361,8 @@ with main_col_right:
     
     # ZIP-level Map selector (below the container, above the map)
         st.markdown("#### ZIP-level Map (Select Metro Below)")
-        st.caption("The map displays PTI ratios calculated at the ZIP-code level.")
+        st.markdown("""The map shows whether a region is affordable based on the maximum 
+        affordable price calculated in the **Affordability Summary**.""")
         # 1. Extract unique pairs of abbreviation ('city') and full name ('city_full')
         if not city_data.empty:
             metro_map_df = city_data[['city', 'city_full']].drop_duplicates()
@@ -419,6 +424,7 @@ with main_col_right:
                 should_trigger_spinner = map_selection_changed or income_changed
 
                 st.markdown(f"**Map for {selected_map_metro_full} ({selected_year})**")
+                st.markdown("""Red is used for more unaffordable areas, and green is used for affordable areas.  """)
                 
                 if should_trigger_spinner:
                     loading_message_placeholder = st.empty()
@@ -539,8 +545,10 @@ with main_col_right:
                                 hover_data={
                                     price_col: ":,.0f",
                                     income_col: ":,.0f",
-                                    RATIO_COL: ":.2f",
-                                    "affordability_rating": True,
+                                    "zip_str_padded":False,
+                                    "color_value": False,
+                                    # RATIO_COL: ":.2f",
+                                    # "affordability_rating": True,
                                 },
                                 mapbox_style="carto-positron",
                                 center={
@@ -607,12 +615,18 @@ with main_col_right:
                     row = city_row.iloc[0]
                     st.markdown(f"#### Metro Area Snapshot: {row['city_full']} ({selected_year})")
 
+                    # st.markdown(
+                    #     f"""
+                    #     - Median sale price: **${row['Median Sale Price']:,.0f}**
+                    #     - Per-capita income: **${row['Per Capita Income']:,.0f}**
+                    #     - Metro-area price-to-income ratio: **{row[RATIO_COL]:.2f}**
+                    #     - **Affordability Rating:** **{row['affordability_rating']}** """
+                    # )
                     st.markdown(
                         f"""
                         - Median sale price: **${row['Median Sale Price']:,.0f}**
                         - Per-capita income: **${row['Per Capita Income']:,.0f}**
-                        - Metro-area price-to-income ratio: **{row[RATIO_COL]:.2f}**
-                        - **Affordability Rating:** **{row['affordability_rating']}** """
+                         """
                     )
 
 # =====================================================================
