@@ -42,51 +42,19 @@ st.markdown(
 )
 
 # Inject CSS
-# Inject Global CSS and FontAwesome
+
 st.markdown(
     """
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    
     <style>
-    /* 1. Global UI Cleanups */
     [data-testid="stAlert"] { display: none !important; }
+    /* Optional: Global tightening */
     .block-container { padding-top: 2rem; }
-
-    /* 2. Column Height Standardization */
-    /* Force columns in a horizontal block to be equal height */
-    div[data-testid="stHorizontalBlock"] {
-        align-items: stretch;
-    }
-    
-    /* Force the internal containers to expand to fill that height */
-    div[data-testid="column"] {
-        display: flex;
-        flex-direction: column; 
-    }
-    
-    /* Target the container with border to grow */
-    div[data-testid="stVerticalBlockBorderWrapper"] {
-        flex-grow: 1;
-    }
     </style>
+
     """,
     unsafe_allow_html=True
 )
-
-
-
-# st.markdown(
-#     """
-#     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-#     <style>
-#     [data-testid="stAlert"] { display: none !important; }
-#     /* Optional: Global tightening */
-#     .block-container { padding-top: 2rem; }
-#     </style>
-
-#     """,
-#     unsafe_allow_html=True
-# )
 
 # # Try to standardize column heights:
 # st.markdown("""

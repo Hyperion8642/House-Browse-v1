@@ -120,6 +120,7 @@ def make_city_view_data(df_full: pd.DataFrame, annual_income: float, year: int, 
     return city_agg
 
 
+
 def make_city_history(df: pd.DataFrame, city_name: str) -> pd.DataFrame:
     """
     Return year-level history for a selected city:
